@@ -110,27 +110,24 @@ public class BookService {
         return true;
     }
 
+    public  Map<String ,List<String>> lastFavsOrReads (long bookId, String param){
+
+        Optional<Book> book = bookRepository.findById(bookId);
+
+        if (!book.isPresent())
+            throw new IllegalArgumentException("kitap bulunamadı");
+
+        if(param.equals("favorites")){
+            return listFormatter(book.get().getFavUserList());
+        }else if(param.equals("reads")){
+            return listFormatter(book.get().getReadUserList());
+        }
+        throw new IllegalArgumentException("Girilen parametre yanlış");
+    }
+
     //@Todo sadece 10 isim için tüm kişileri ve bilgilerini çekmek mantıksız daha verimli yollarını ara
-    //pageable dene
-    public Map<String, List<String>> getAllFavsUser(long bookId) {
 
-        Optional<Book> book = bookRepository.findById(bookId);
-
-        if (!book.isPresent())
-            throw new IllegalArgumentException("kitap bulunamadı");
-
-        return listFormatter(book.get().getFavUserList());
-    }
-
-    public Map<String, List<String>> getAllReadUser(long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-
-        if (!book.isPresent())
-            throw new IllegalArgumentException("kitap bulunamadı");
-
-        return listFormatter(book.get().getReadUserList());
-    }
-
+    //kitabı favlayan yada okuyan son 10 kşinin ismi ve toplam kaç kişi olduğu
     private Map<String, List<String>> listFormatter(List<User> userList) {
         Map<String, List<String>> infoMap = new HashMap<>();
         List<String> usernameList = new ArrayList<>();

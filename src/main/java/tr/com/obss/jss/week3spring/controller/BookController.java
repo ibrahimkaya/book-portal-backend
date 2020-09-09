@@ -63,16 +63,10 @@ public class BookController {
 
     //@Todo parametreyi servise geçirip orada tek fonksiyonda hallet
 
-    @GetMapping("/{param}/{bookid}")
+    @GetMapping("/{bookId}/{param}")
     @ResponseBody
-    public ResponseEntity<?> getAllFavOrReads(@PathVariable String param,@PathVariable long bookid) throws NotFoundException {
-        if(param.equals("favorites")){
-            return ResponseEntity.ok(bookService.getAllFavsUser(bookid));
-        }else if(param.equals("reads")){
-            return ResponseEntity.ok(bookService.getAllReadUser(bookid));
-        }else{
-            throw new NotFoundException("sayfa bulunamadı");
-        }
+    public ResponseEntity<?> getAllFavOrReads(@PathVariable String param,@PathVariable long bookId) throws NotFoundException {
+        return ResponseEntity.ok(bookService.lastFavsOrReads(bookId,param));
     }
 
 
