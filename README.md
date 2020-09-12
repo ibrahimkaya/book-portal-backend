@@ -15,15 +15,24 @@ Simple book portal back-end project,
 - Role based securiy with Spring security
 - Paticular Books favorites or reads list
 
+#### Enitity relations
+- Users and Roles many to many [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/User.java#L22) and [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/Role.java#L19)
+- Book and Users has many to many relations through to favorites and reads lists [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/User.java#L29) and [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/Book.java#L25)
+- Book and Authors one to many [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/Book.java#L19) and [here](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/entity/Author.java#L16)
+
 
 ### Api Documentation
-- [Swagger ui api doc](http://localhost:8081/swagger-ui.html#/)
+- [Swagger ui api doc](http://localhost:8081/swagger-ui.html#/) (required run the project locally)
 
 ### Tech
 Library uses a couple of open source projects to work properly:
 * [Spring Framework](https://spring.io/) - Dependency Injection Container
 * [Maven](https://maven.apache.org/) - Project Management Tool
 * [MySQL](https://www.mysql.com/) - Relational Database Management System
+
+#### Security and Cors control
+- [web security config](https://github.com/ibrahimkaya/book-portal-backend/blob/master/src/main/java/tr/com/obss/jss/week3spring/config/WebSecurityConfig.java)
+- Edit [this](https://github.com/ibrahimkaya/book-portal-backend/blob/a65c817ab0cf183e3a99c5e5454c7d3af43f14f5/src/main/java/tr/com/obss/jss/week3spring/config/WebSecurityConfig.java#L87) cors config method for more specialize request domain permission.
 
 
 ### Installation
