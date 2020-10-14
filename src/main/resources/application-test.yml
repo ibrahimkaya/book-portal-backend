@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/jss?serverTimezone=Europe/Istanbul
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
