@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class AuthorService {
 
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
     public AuthorService(AuthorRepository authorRepository) {
@@ -37,8 +37,7 @@ public class AuthorService {
     public Author delete(AuthorDTO authorDTO){
         Optional<Author> author = authorRepository.findByName(authorDTO.getName());
 
-        if(!author.isPresent())
-            throw new IllegalArgumentException("girilen isimde yazar bulunamadı");
+        checkAuthorExists(author);
 
         author.get().setActive(!author.get().isActive());
         return authorRepository.save(author.get());
@@ -47,18 +46,21 @@ public class AuthorService {
     public Author update(AuthorUpdateDTO authorUpdateDTO){
         Optional<Author> author = authorRepository.findByName(authorUpdateDTO.getName());
 
-        if(!author.isPresent())
-            throw new IllegalArgumentException("girilen isimde yazar bulunamadı");
+        checkAuthorExists(author);
 
         author.get().setName(authorUpdateDTO.getNewName());
         return authorRepository.save(author.get());
     }
 
-
-    public Page<Author> getByName(String name,int pageNumber,int pageSize){
+    public Page<Author> getByName(String name, int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return authorRepository.findByNameIsContaining(name,pageable);
+        return authorRepository.findByNameIsContaining(name, pageable);
 
+    }
+
+    public void checkAuthorExists(Optional<Author> author) {
+        if (!author.isPresent())
+            throw new IllegalArgumentException("girilen isimde yazar bulunamadı");
     }
 
 }
